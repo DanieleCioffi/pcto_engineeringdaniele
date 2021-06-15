@@ -2,3 +2,30 @@ body {
   font-size: 2.875rem;
 }
 
+#container {
+  background-color: #5d5d61;
+}
+
+#login {
+  float: right;
+  margin-top: 15px;
+}
+
+#register {
+  float: right;
+  margin-top: 15px;
+}
+
+#logo {
+  float: left;
+  margin-top: 10px;
+}
+
+#title {
+  color: white;
+}
+
+#lista {
+  justify-content: center;
+  display: flex;
+}
