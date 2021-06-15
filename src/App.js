@@ -1,12 +1,12 @@
 class App {
   constructor(list) {
     list = [
-      new Film("Film 1", "Azione", "2020"),
-      new Film("Film 2", "Thriller", "2021"),
-      new Film("Film 3", "Horror", "2022"),
-      new Film("Film 4", "Drammatico", "2023"),
-      new Film("Film 5", "Comico", "2024"),
-      new Film("Film 6", "Romantico", "2025")
+      new Film("F&F1", "Azione", "2020"),
+      new Film("Amore e Odio", "Thriller", "2021"),
+      new Film("2030", "Horror", "2022"),
+      new Film("Pippo e Pluto", "Drammatico", "2023"),
+      new Film("L'altro mondo", "Comico", "2024"),
+      new Film("La casa Stregata", "Romantico", "2025")
     ];
 
     this.list = list
