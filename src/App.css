@@ -14,6 +14,7 @@ body {
 #register {
   float: right;
   margin-top: 15px;
+  margin-right: 10px;
 }
 
 #logo {
@@ -25,7 +26,12 @@ body {
   color: white;
 }
 
-#lista {
+#list {
   justify-content: center;
   display: flex;
+}
+
+#searchBar{
+  width: max-content;
+  margin: auto;
 }
