@@ -13,17 +13,21 @@
 <body>
   <div id="container" class="container-fluid" >
     <p align="center">
-      <img src="logo.png" id="logo" class="rounded" width="50">
+      <img src="Assets/logo.png" id="logo" class="rounded" width="50">
       <a id="title">Cinema</a>
       <button id="login" class="btn btn-primary">Accedi</button>
       <button id="register" class="btn btn-secondary">Registrati</button>
     </p>
   </div>
 
+  <form class="d-flex" id="searchBar" style="width: max-content;">
+    <input id="search" class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+    <button class="btn btn-outline-success" type ="button" onclick="app.searchFilm()">Search</button>
+  </form>
+
   <h1 align="center">Selezione film</h1>
 
-  <div id="lista"></div>
-
+  <div id="list"></div>
   <!-- #TODO: Integra file js-->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
   <script src="App.js"></script>
