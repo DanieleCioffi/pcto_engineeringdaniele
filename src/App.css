@@ -35,3 +35,12 @@ body {
   width: max-content;
   margin: auto;
 }
+
+.card {
+    width: 50rem;
+    height: auto;
+}
+
+.card-title {
+    font-size: 60px
+}
