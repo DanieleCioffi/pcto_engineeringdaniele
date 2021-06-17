@@ -1,88 +1,89 @@
 class App {
   constructor(list) {
-    this.initList()
+    this.initList();
   }
 
-  //inizializza la lista facendo la fetch dei valori dal server
+  //initializes the list using fetch from a server
   async initList() {
-    const req = await fetch("https://api.themoviedb.org/3/movie/popular?api_key=c4d79d0d1e50bf8bc86b7afbd240e4df&language=en&page=1");
+    const req = await fetch(
+      "https://api.themoviedb.org/3/movie/popular?api_key=c4d79d0d1e50bf8bc86b7afbd240e4df&language=en&page=1"
+    );
     const data = await req.json();
 
     let list = [];
     let tmp;
 
     for (let i = 0; i < data.results.length; i++) {
-        tmp = data.results[i];
-        list.push(
-            new Movie(
-                tmp.title,
-                tmp.overview,
-                tmp.poster_path,
-                tmp.backdrop_path,
-                tmp.release_date
-            )
-        );
+      tmp = data.results[i];
+      list.push(
+        new Movie(tmp.title, tmp.overview, tmp.poster_path, tmp.release_date)
+      );
     }
 
-    this.list = list
-    this.showList(this.list)
+    this.list = list;
+    this.showCards(this.list);
   }
 
-  //Mostra la lista passata come parametro sulla pagina HTML
-  showList(values) {
-    let obj = '<ul class="list-group">';
-
+  //Shows the bootstrap cards using the values from the parameter of the function
+  showCards(values) {
+    //let obj = "<div id=\"films\" class='row'>";
+    let obj = "";
     for (let i = 0; i < values.length; i++) {
-        obj += '<li class="list-group-item">' + values[i].toString() + "</li>";
+      obj += '<div class="card">';
+      obj +=
+        '<img class="card-img-top" src="https://www.themoviedb.org/t/p/w600_and_h900_bestv2/' +
+        values[i].poster_path +
+        '"alt="Card image cap"></img>';
+      obj += '<div class="card-body">';
+      obj += '<h5 class="card-title">' + values[i].title + "</h5>";
+      obj += '<p class="card-text">' + values[i].overview + "</p>";
+      obj += '<div class="btn-div">';
+      obj +=
+        '<a href="#" class="btn btn-primary" id="detailsButton">Details</a>';
+      obj += "</div>";
+      obj += "</div>";
+      obj += "</div>";
     }
 
-    obj += "</ul>";
+    //obj += "</div>";
 
-    document.getElementById("list").innerHTML = obj;
+    document.getElementById("films").innerHTML = obj;
   }
 
-  //cerca la stringa scritta nella searchbar in tutti i titoli dei film della lista
+  //searches for the string written in the searchbox and shows all the cards whose title contains the string
   searchFilm() {
     let value = document.getElementById("search").value;
     let res = [];
 
     for (let i = 0; i < this.list.length; i++) {
-        let str = this.list[i].title.toUpperCase();
-        if (str.search(value.toUpperCase()) >= 0) {
-            res.push(this.list[i]);
-        }
+      let str = this.list[i].title.toUpperCase();
+      if (str.search(value.toUpperCase()) >= 0) {
+        res.push(this.list[i]);
+      }
     }
-    this.showList(res);
-  }
-
-  showCards(){
-    let values = this.list
-    let obj = "<div id=\"films\" class='container-fluid'>"
-
-    for(let i=0 ; i<values.length ; i++){
-        obj += "<div class=\"card\">"
-        obj += "<div class=\"card-body\">"
-        obj += "<img class=\"card-img-top\" src=\"Assets/logo.png\" alt=\"Card image cap\"></img>"
-        obj += "<h5 class=\"card-title\">" + values[i].title + "</h5>"
-        obj += "<p class=\"card-text\">"+ values[i].overview + "</p>"
-        obj += "<a href=\"#\" class=\"btn btn-primary\">Details</a>"
-        obj += "</div>"
-        obj += "</div>"
-    }
-
-    obj += "</div>"
-
-    document.getElementById("films").innerHTML = obj
+    this.showCards(res);
   }
 }
 
 class Movie {
-  constructor(title, overview, poster_path, backdrop_path, date) {
+  constructor(title, overview, poster_path, date) {
     this.title = title;
     this.overview = overview;
     this.poster_path = poster_path;
-    this.backdrop_path = backdrop_path;
     this.date = date;
+    this.totalOverview = this.cutOverview();
+  }
+
+  cutOverview() {
+    const maxChar = 200;
+    let res = this.overview;
+
+    if (this.overview.length > maxChar) {
+      this.overview = this.overview.slice(0, maxChar);
+      this.overview += "...";
+    }
+
+    return res;
   }
 
   toString() {
